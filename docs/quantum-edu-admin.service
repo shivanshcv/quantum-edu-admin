@@ -1,0 +1,14 @@
+[Unit]
+Description=Quantum Edu Django Admin
+After=network.target
+
+[Service]
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/quantum_edu_admin
+EnvironmentFile=/home/ubuntu/quantum_edu_admin/gunicorn.env
+ExecStart=/home/ubuntu/quantum_edu_admin/.venv/bin/gunicorn --bind 0.0.0.0:8000 --workers 2 --access-logfile - --error-logfile - --capture-output --enable-stdio-inheritance quantum_admin.wsgi:application
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

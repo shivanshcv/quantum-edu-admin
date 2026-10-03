@@ -1,0 +1,32 @@
+{% extends "admin/base_site.html" %}
+{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+  <a href="{% url 'admin:index' %}">Home</a>
+  &rsaquo; <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a>
+  &rsaquo; <a href="{% url 'admin:admin_app_assessment_changelist' %}">Assessments</a>
+  &rsaquo; <a href="{% url 'admin:admin_app_assessment_change' assessment.pk %}">Assessment #{{ assessment.pk }}</a>
+  &rsaquo; Import CSV
+</div>
+{% endblock %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+<p>Assessment ID: <strong>{{ assessment.pk }}</strong> — Product content: {{ assessment.product_content_id }}</p>
+<p class="help">
+  Upload a UTF-8 CSV with columns:
+  <code>question_number</code>, <code>question_text</code>, <code>option_order</code>, <code>option_text</code>, <code>is_correct</code>
+  (<code>true</code>/<code>false</code>). This <strong>replaces</strong> all existing questions and options for this assessment.
+</p>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="form-row">
+    <label for="id_csv_file">CSV file:</label>
+    <input id="id_csv_file" type="file" name="csv_file" accept=".csv,text/csv" required>
+  </div>
+  <div class="submit-row">
+    <input type="submit" value="Import" class="default">
+    <a href="{% url 'admin:admin_app_assessment_change' assessment.pk %}" class="button">Cancel</a>
+  </div>
+</form>
+{% endblock %}

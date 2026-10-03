@@ -1,0 +1,10 @@
+Django>=4.2
+# Django 5.1+ requires mysqlclient 2.2.1+ (PyMySQL shim alone fails the version check). Deploy scripts install Ubuntu libs.
+# macOS local: brew install mysql pkg-config && export PKG_CONFIG_PATH="$(brew --prefix mysql)/lib/pkgconfig"
+mysqlclient>=2.2.1
+PyMySQL>=1.1
+whitenoise>=6.0
+python-dotenv>=1.0
+django-storages>=1.14
+boto3>=1.34
+gunicorn>=21.0

@@ -1,0 +1,9 @@
+{% extends "admin/base.html" %}
+{% block dark-mode-vars %}{% endblock %}
+{% block extrastyle %}
+{{ block.super }}
+<style>
+  /* Hide theme toggle since dark mode is disabled */
+  .theme-toggle { display: none !important; }
+</style>
+{% endblock %}

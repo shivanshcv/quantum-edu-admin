@@ -1,0 +1,14 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+.git/
+.DS_Store
+staticfiles/
+.env
+deploy.env*
+deploy.prod.env*
+gunicorn.env
+db.sqlite3
+docs/
+test_admin_e2e.py
